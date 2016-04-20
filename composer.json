@@ -1,10 +1,11 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "license": "MIT",
+    "name": "leonard/my_project",
+    "license": "proprietary",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-4": { "": "src/" }
+        "psr-4": {
+            "": "src/"
+        }
     },
     "require": {
         "php": ">=5.3.9",
@@ -16,7 +17,8 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "knplabs/knp-paginator-bundle": "2.5.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
@@ -41,10 +43,7 @@
         ]
     },
     "config": {
-        "bin-dir": "bin",
-        "platform": {
-            "php": "5.3.9"
-        }
+        "bin-dir": "bin"
     },
     "extra": {
         "symfony-app-dir": "app",
@@ -52,9 +51,6 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "2.7-dev"
         }
     }
 }

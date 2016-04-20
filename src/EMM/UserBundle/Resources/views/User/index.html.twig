@@ -1,0 +1,56 @@
+{% extends 'layout.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    {{ include('EMMUserBundle:User:messages/success.html.twig') }}
+    <div class="container">
+        <div class="col-md-12">
+            <div class="page-header margin-none">
+                <h2 class="padding-none">Users</h2>
+            </div>
+            <div class="table-responsive">
+                <span class="text-primary"><b>Total records: </b>{{ pagination.getTotalItemCount }}</span>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>{{ knp_pagination_sortable(pagination, 'Username', 'u.username') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'First name', 'u.first_name') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Last name', 'u.last_name') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Email', 'u.email') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Role', 'u.role') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Created', 'u.createdAt') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Updated', 'u.UpdatedAt') }}</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in pagination %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.firstName }}</td>
+                            <td>{{ user.lastName }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% if user.role == 'ROLE_ADMIN' %}
+                                    <strong>Admin</strong>
+                                {% else %}
+                                    <strong>User</strong>
+                                {% endif %}
+                            </td>
+                            <td>{{ user.createdAt|date('d-m-Y H:i') }}</td>
+                            <td>{{ user.updatedAt|date('d-m-Y H:i') }}</td>
+                            <td>
+                                <a href="{{ user.id }}" class="btn btn-sm btn-info">View</a>
+                                <a href="{{ path('emm_user_edit', {id:user.id}) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="#" class="btn btn-sm btn-danger btn-delete">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
