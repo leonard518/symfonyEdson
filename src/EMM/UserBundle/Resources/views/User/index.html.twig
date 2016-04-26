@@ -39,7 +39,7 @@
                             <td>{{ user.createdAt|date('d-m-Y H:i') }}</td>
                             <td>{{ user.updatedAt|date('d-m-Y H:i') }}</td>
                             <td>
-                                <a href="{{ user.id }}" class="btn btn-sm btn-info">View</a>
+                                <a href="{{ path('emm_user_view', {id:user.id}) }}" class="btn btn-sm btn-info">View</a>
                                 <a href="{{ path('emm_user_edit', {id:user.id}) }}" class="btn btn-sm btn-primary">Edit</a>
                                 <a href="#" class="btn btn-sm btn-danger btn-delete">Delete</a>
                             </td>

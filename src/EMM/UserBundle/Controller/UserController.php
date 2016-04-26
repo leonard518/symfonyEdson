@@ -174,10 +174,13 @@ class UserController extends Controller
         $repository = $this->getDoctrine()->getRepository('EMMUserBundle:User');
 
         //$user = $repository->find($id);
-        $user = $repository->findOneBy($id);
+        $user = $repository->find($id);
 
-        return new Response('<b>Usuario: </b>'.$user->getUsername().'</br> <b>Email: </b>'.$user->getEmail());
+        if(!$user){
+            throw $this->createNotFoundException('User not Found');
+        }
 
+        return $this->render('EMMUserBundle:User:view.html.twig', array('user' => $user));
     }
 
 }
