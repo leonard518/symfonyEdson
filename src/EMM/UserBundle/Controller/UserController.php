@@ -179,8 +179,20 @@ class UserController extends Controller
         if(!$user){
             throw $this->createNotFoundException('User not Found');
         }
+        $deleteForm = $this->createDeleteForm($user);
 
-        return $this->render('EMMUserBundle:User:view.html.twig', array('user' => $user));
+        return $this->render('EMMUserBundle:User:view.html.twig', array(
+            'user'          => $user,
+            'delete_form'   => $deleteForm->creatView()
+        ));
+    }
+
+    private  function createDeleteForm($user)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('emm_user_delete', array('id' => $user->getId())))
+            ->setMethod('DELETE')
+            ->getForm();
     }
 
 }
