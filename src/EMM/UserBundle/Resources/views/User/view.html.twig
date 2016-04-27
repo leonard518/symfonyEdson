@@ -31,14 +31,14 @@
         <div class="col-md-3">
             <h3>Actions</h3>
             <p>
-                <a href="{{ path('emm_user_edit', { id: user.id}) }}" class="btn btn-primary btn-primary btn-lg">
+                <a href="{{ path('emm_user_edit', { id: user.id}) }}" class="btn btn-primary btn-primary btn-lg btn-block   ">
                     <span class="glyphicon glyphicon-edit"></span>
                     Edit User
                 </a>
             </p>
-            {#<p>
-                {{ include('EMMUserBundle:User:forms/form.html.twig', {form: delete_from, message: 'Are you sure?'}) }}
-            </p>#}
+            <p>
+                {{ include('EMMUserBundle:User:forms/form.html.twig', {form: delete_form, message: 'Are you sure?'}) }}
+            </p>
         </div>
     </div>
 {% endblock %}

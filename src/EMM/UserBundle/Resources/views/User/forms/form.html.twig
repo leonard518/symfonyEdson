@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+<input type="button" value="Delete User" class="btn btn-block btn-lg btn-danger" onclick="confirmDelete()">
+
+{{ form_end(form) }}
+
+<script>
+    var message = '{{ message }}';
+
+    function confirmDelete() {
+        bootbox.confirm(message, function (result) {
+           if (result == true)
+           {
+               document.form.submit();
+           }
+        });
+
+    }
+</script>

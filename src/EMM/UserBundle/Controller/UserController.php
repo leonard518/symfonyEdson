@@ -183,7 +183,7 @@ class UserController extends Controller
 
         return $this->render('EMMUserBundle:User:view.html.twig', array(
             'user'          => $user,
-            'delete_form'   => $deleteForm->creatView()
+            'delete_form'   => $deleteForm->createView()
         ));
     }
 
@@ -193,6 +193,30 @@ class UserController extends Controller
             ->setAction($this->generateUrl('emm_user_delete', array('id' => $user->getId())))
             ->setMethod('DELETE')
             ->getForm();
+    }
+    
+    public function deleteAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $user = $em->getRepository('EMMUserBundle:User')->find($id);
+
+        if(!$user)
+        {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        $form = $this->createDeleteForm($user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em->remove($user);
+            $em->flush();
+
+            $this->addFlash('mensaje', 'The user has been deleted.');
+            return $this->redirectToRoute('emm_user_index');
+        }
     }
 
 }
